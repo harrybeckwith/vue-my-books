@@ -1,20 +1,15 @@
-import App from './App.vue';
-import Event from '@/views/Event.vue';
-import CreateEvents from '@/views/CreateEvents.vue';
+import WantToRead from '@/views/WantToRead.vue';
+import SearchResults from '@/views/SearchResults.vue';
 
 export default [
   {
+    path: '/want-to-read',
+    component: WantToRead,
+    name: 'want-to-read',
+  },
+  {
     path: '/',
-    component: App,
-  },
-  {
-    path: '/create-events',
-    component: CreateEvents,
-  },
-  {
-    path: '/event/:id',
-    component: Event,
-    name: 'event',
-    props: true,
+    component: SearchResults,
+    name: 'home',
   },
 ];

@@ -31,6 +31,9 @@ export const store = new Vuex.Store({
     searchResults: state => {
       return state.searchResults;
     },
+    wantToRead: state => {
+      return state.wantToRead;
+    },
   },
   mutations: {
     ADD_EVENT(state, event) {
@@ -54,17 +57,19 @@ export const store = new Vuex.Store({
           return acc;
         }
       }, []);
-
       // update state with no dups
       state.wantToRead = filteredArr;
+    },
+    DELETE_WANT(state, want) {
+      state.wantToRead.splice(want, 1);
     },
   },
   actions: {
     createEvent({ commit }, event) {
       commit('ADD_EVENT', event);
     },
-    removeEvent({ commit }, event) {
-      commit('DELETE_EVENT', event);
+    removeWant({ commit }, event) {
+      commit('DELETE_WANT', event);
     },
     addSearchResults({ commit }, results) {
       commit('ADD_RESULTS', results);

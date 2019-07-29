@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 <template>
-     <div class="results">
+     <div class="container">
         <div v-for="(item, i ) in results.items" :key="i" class="book">
                 <p v-for="a in item.volumeInfo.authors" :key="a"> Author: {{a}} </p>
             <img :src ="item.volumeInfo.imageLinks.smallThumbnail"/>
@@ -47,12 +47,4 @@ export default {
 </script>
 
 <style>
-.results {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-.book {
-    width: 20%;
-}
 </style>

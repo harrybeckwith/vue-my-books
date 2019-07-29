@@ -1,27 +1,32 @@
 <template>
   <div>
-    <Search/>
-    <div v-if="!loading">
-        <Results/>
-      </div>
+    <router-link tag="li" to="/want-to-read" v-if="wantToRead.length > 0">
+      <a>want to read</a>
+    </router-link>
+      <router-link tag="li" to="/">
+      <a>search</a>
+    </router-link>
+      <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Search from './components/Search.vue';
-import Results from './components/Results.vue';
 import { mapGetters } from 'vuex';
 export default {
     name: 'app',
-    components: {
-        Search,
-        Results,
-    },
     computed: {
-        ...mapGetters(['events', 'loading']),
+        ...mapGetters(['wantToRead']),
     },
 };
 </script>
 
 <style>
+.container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.book {
+    width: 20%;
+}
 </style>
