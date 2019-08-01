@@ -11,7 +11,7 @@ export const store = new Vuex.Store({
     searchResults: null,
     loading: false,
     wantToRead: [],
-    tempWant: [],
+    readAlready: [],
   },
   getters: {
     cat: state => {
@@ -45,11 +45,11 @@ export const store = new Vuex.Store({
     ADD_RESULTS(state, results) {
       state.searchResults = results;
     },
-    ADD_WANT(state, want) {
-      // add want to read object
-      state.wantToRead.push(want);
+    ADD_BOOK(state, payload) {
+      // add book
+      state[payload.dataName].push(payload.bookInfo);
       // remove duplicates
-      const filteredArr = state.wantToRead.reduce((acc, current) => {
+      const filteredArr = state[payload.dataName].reduce((acc, current) => {
         const x = acc.find(item => item.title === current.title);
         if (!x) {
           return acc.concat([current]);
@@ -58,10 +58,13 @@ export const store = new Vuex.Store({
         }
       }, []);
       // update state with no dups
-      state.wantToRead = filteredArr;
+      state[payload.dataName] = filteredArr;
     },
     DELETE_WANT(state, want) {
       state.wantToRead.splice(want, 1);
+    },
+    RESET_SEARCH_RESULTS(state) {
+      state.searchResults = null;
     },
   },
   actions: {
@@ -74,8 +77,11 @@ export const store = new Vuex.Store({
     addSearchResults({ commit }, results) {
       commit('ADD_RESULTS', results);
     },
-    addWantToRead({ commit }, want) {
-      commit('ADD_WANT', want);
+    addBook: ({ commit }, payload) => {
+      commit('ADD_BOOK', payload);
+    },
+    resetSearchResults({ commit }) {
+      commit('RESET_SEARCH_RESULTS');
     },
   },
 });

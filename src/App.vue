@@ -1,7 +1,7 @@
 <template>
   <div>
     <router-link tag="li" to="/want-to-read" v-if="wantToRead.length > 0">
-      <a>want to read</a>
+      <a>want to read</a> {{ wantToRead.length }}
     </router-link>
       <router-link tag="li" to="/">
       <a>search</a>
