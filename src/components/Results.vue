@@ -1,13 +1,17 @@
 <template>
      <div class="container">
-        <div v-for="(item, i ) in results.items" :key="i" class="book">
+        <div 
+        v-for="(item, i ) in results.items" 
+        :key="i" class="book"
+        :class="{ readActive: i === activeItem}"
+        >
             <p v-for="a in item.volumeInfo.authors" :key="a"> Author: {{a}} </p>
             <img :src ="item.volumeInfo.imageLinks.smallThumbnail"/>
             <p> title: {{ item.volumeInfo.title }} </p>
             <p v-if="item.volumeInfo.averageRating"> Rating:  {{ item.volumeInfo.averageRating }} </p>
             <p> Description: {{ item.volumeInfo.description }} </p>
         
-            <button @click="wantToRead(i)"> want to read</button>
+            <button class ="book__btn book__want" @click="wantToRead(i)"> want to read</button>
             <button @click="readAlready(i)"> read already </button>
         </div>
     </div>
@@ -17,6 +21,11 @@
 import copyBookInfo from '../helpers/copyBookInfo';
 export default {
     name: 'Results',
+    data() {
+        return {
+            activeItem: null,
+        };
+    },
     computed: {
         results() {
             return this.$store.getters.searchResults;
@@ -28,6 +37,7 @@ export default {
         },
         readAlready(i) {
             copyBookInfo(i, 'readAlready');
+            this.activeItem = i;
         },
     },
     destroyed() {
@@ -36,6 +46,12 @@ export default {
     },
 };
 </script>
-
-<style>
+<style lang="scss">
+.readActive {
+    .book {
+        &__want {
+            display: none;
+        }
+    }
+}
 </style>

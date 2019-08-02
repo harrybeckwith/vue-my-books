@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-         <div v-for="(item, i ) in readAlready" :key="i" class="book">
+         <div v-for="(item, i ) in wantToRead" :key="i" class="book">
             <p v-for="a in item.authors" :key="a"> Author: {{a}} </p>
             <img :src ="item.image.smallThumbnail"/>
             <p> title: {{ item.title }} </p>
@@ -15,8 +15,8 @@
 <script>
 export default {
     computed: {
-        readAlready() {
-            return this.$store.getters.readAlready;
+        wantToRead() {
+            return this.$store.getters.wantToRead;
         },
     },
     methods: {
