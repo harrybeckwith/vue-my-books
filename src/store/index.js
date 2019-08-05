@@ -39,6 +39,9 @@ export const store = new Vuex.Store({
     readAlready: state => {
       return state.readAlready;
     },
+    user: state => {
+      return state.user;
+    },
   },
   mutations: {
     DELETE_EVENT(state, event) {
@@ -96,7 +99,7 @@ export const store = new Vuex.Store({
         .createUserWithEmailAndPassword(payload.email, payload.password)
         .then(user => {
           const newUser = {
-            id: user.uid,
+            id: user.user.uid,
           };
           commit('SET_USER', newUser);
         })
